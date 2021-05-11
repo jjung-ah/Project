@@ -23,8 +23,6 @@ for epoch in range(2):  # loop over the dataset multiple times
     for i, data in enumerate(trainloader, 0):
         # get the inputs
         inputs, labels = data
-        #inputs = torch.FloatTensor(inputs)   # 20210510  RuntimeError: expected scalar type Double but found Float
-        #labels = torch.FloatTensor(labels)   # 20210510  RuntimeError: expected scalar type Double but found Float
         inputs, labels = inputs.to(device), labels.to(device)
         # zero the parameter gradients
         optimizer.zero_grad()
