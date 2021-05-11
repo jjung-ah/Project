@@ -20,4 +20,5 @@ dummy_data = torch.empty(1, 1, 224, 224, dtype = torch.float32)
 torch.onnx.export(model, dummy_data, "MyVGG16.onnx")
 
 
+# !pip install netron
 netron.start('E:\\Python_Project\\vgg16.onnx')
