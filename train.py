@@ -27,17 +27,12 @@ for epoch in range(2):  # loop over the dataset multiple times
         # zero the parameter gradients
         optimizer.zero_grad()
 
-        #print(inputs.shape)
-        #print(inputs.shape)  
+
         # forward + backward + optimize
         model = model.float()
-        #outputs,f = model(inputs)
         model = model.cuda()
-        outputs = model(inputs)   # 20210510  RuntimeError: expected scalar type Double but found Float
-        #outputs = output.type(torch.FloatTensor).cuda()
-        #labels = labels.type(torch.FloatTensor).cuda()
-        #print(outputs.shape)
-        #print(labels.shape)
+        outputs = model(inputs)
+
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
