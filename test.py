@@ -1,9 +1,24 @@
 # 테스트 데이터를 사용하여 모델을 테스트한다.
+import torch.optim as optim
+import time
+import torch
+import torchvision
+import torchvision.transforms as transforms
+
+import torch.nn as nn
+import torch.nn.functional as F
+from configs import Configs
+from vggModule import *
+from MyDataLoader import *
+
+
 with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하지 않는다.
     X_test = mnist_test.test_data.view(-1, 28 * 28).float().to(device)
     Y_test = mnist_test.test_labels.to(device)
 
-    prediction = linear(X_test)
+    model = torch.load(Configs.model_path)
+    model.eval()
+    prediction = model(X_test)
     correct_prediction = torch.argmax(prediction, 1) == Y_test
     accuracy = correct_prediction.float().mean()
     print('Accuracy:', accuracy.item())
