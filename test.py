@@ -32,7 +32,7 @@ with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하�
     accuracy = correct_prediction.float().mean()
     print('Accuracy:', accuracy.item())
 
-    # MNIST 테스트 데이터에서 무작위로 하나를 뽑아서 예측을 해본다
+    # 테스트 데이터에서 무작위로 하나를 뽑아서 예측을 해본다
     r = random.randint(0, len(testloader) - 1)
     X_single_data = images[r:r + 1].float().to(device)
     #X_single_data = images[r:r + 1].view(-1, 224 * 224).float().to(device)
