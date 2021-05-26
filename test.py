@@ -13,6 +13,8 @@ from configs import Configs
 from vggModule import *
 from MyDataLoader import *
 
+classes = ['fear', 'happy', 'sad', 'neutral', 'disgust', 'surprise', 'angry']
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 trainloader, testloader = make_train_val_set(Configs.data_root)
 dataiter = iter(testloader)
@@ -38,9 +40,11 @@ with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하�
     #X_single_data = images[r:r + 1].view(-1, 224 * 224).float().to(device)
     Y_single_data = labels[r:r + 1].to(device)
 
-    print('Label: ', Y_single_data.item())
+    #print('Label: ', Y_single_data.item())
+    print('Label: ', Y_single_data.item(), classes[Y_single_data.item()])
     single_prediction = model(X_single_data)
-    print('Prediction: ', torch.argmax(single_prediction, 1).item())
+    #print('Prediction: ', torch.argmax(single_prediction, 1).item())
+    print('Prediction: ', torch.argmax(single_prediction, 1).item(), classes[torch.argmax(single_prediction, 1).item()])
 
     plt.imshow(images[r:r + 1].view(224, 224), cmap='Greys', interpolation='nearest')
     plt.show()
