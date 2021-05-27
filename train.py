@@ -56,18 +56,18 @@ def train(model, trainloader, testloader):
             trainCorrect += predicted.eq(labels.view_as(predicted)).sum().item()
             trainAccuracy = (trainCorrect / trainSize) * 100
 
-        torch.save(model, '/content/drive/MyDrive/vgg16_epoch{}_batch{}_accuracy{:.3f}.pt'.format(epoch+1, i+1, trainAccuracy))
+        torch.save(model, '/content/drive/MyDrive/vgg16_epoch{}_accuracy{:.3f}.pt'.format(epoch+1, trainAccuracy))
         torch.save({
             'epoch': epoch,
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': trainLoss,
-            }, '/content/drive/MyDrive/vgg16_epoch{}_batch{}_accuracy{:.3f}.pth'.format(epoch+1, i+1, trainAccuracy))
+            }, '/content/drive/MyDrive/vgg16_epoch{}_accuracy{:.3f}.pth'.format(epoch+1, trainAccuracy))
 
         #print('epoch {} batch {} train_loss {}  accuracy {}'.format(epoch+1, i+1, trainLoss / trainSize, trainAccuracy))
         print('Epoch {}/{}'.format(epoch, Configs.epochs_nb))
         print("---------")
-        print('train Loss: {}  Acc: {}'.format(trainLoss / trainSize, trainAccuracy))
+        print('train Loss: {}  Acc: {:.6f}'.format(trainLoss / trainSize, trainAccuracy))
         trainLoss = 0.0 
 
 
@@ -111,7 +111,7 @@ def train(model, trainloader, testloader):
                 valAccuracy = (valCorrect / valSize) * 100
             
             #print('validation_loss {} validation_accuracy {}'.format(valLoss / valSize, valAccuracy))
-            print('val Loss: {}  Acc: {}'.format(valLoss / valSize, valAccuracy))
+            print('val Loss: {}  Acc: {:.6f}'.format(valLoss / valSize, valAccuracy))
             valLoss = 0.0
 
 
