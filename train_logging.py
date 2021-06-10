@@ -19,12 +19,17 @@ from utils.wandb_logging.wandb_utils import WandbLogger, check_wandb_resume   # 
 
 
 ###### 20210610  #####################################
-#configure the logging level to DEBUG   
-logging.basicConfig(level=logging.DEBUG)  # DEBUG 이상의 이벤트만 추적
-logger = logging.getLogger(__name__)   
+#configure the logging level to INFO   
+#logging.basicConfig(level=logging.INFO)  # INFO 이상의 이벤트만 추적
+#logger = logging.getLogger(__name__)   
 ######################################################
 
 def train(model, trainloader, testloader):
+
+    ############## 20210610 #########################
+    # set a logger file
+    logger = log(path="logs/", file="cross_val.logs")
+    #################################################
 
     model.train()
 
@@ -81,10 +86,17 @@ def train(model, trainloader, testloader):
             'loss': trainLoss,
             }, '/data/FoodDetection/Object_Detection/yolov5-test/ssd/models/ep200_vgg11_dropout/vgg11_epoch{}_accuracy{:.3f}.pth'.format(epoch+1, trainAccuracy))
 
+
+        ############### 20210610 #################################################
         #print('epoch {} batch {} train_loss {}  accuracy {}'.format(epoch+1, i+1, trainLoss / trainSize, trainAccuracy))
-        print('\nEpoch {}/{}'.format(epoch+1, Configs.epochs_nb))
-        print("---------")
-        print('train Loss: {}  Acc: {:.3f}'.format(trainLoss / trainSize, trainAccuracy))
+        #print('\nEpoch {}/{}'.format(epoch+1, Configs.epochs_nb))
+        #print("---------")
+        #print('train Loss: {}  Acc: {:.3f}'.format(trainLoss / trainSize, trainAccuracy))
+        logger.info("Train {}".format(model_name))
+        logger.info('\nEpoch {}/{}'.format(epoch+1, Configs.epochs_nb))
+        logger.info("---------------------")
+        logger.info('train Loss: {}  Acc: {:.3f}'.format(trainLoss / trainSize, trainAccuracy))
+        ###########################################################################
         trainLoss = 0.0 
 
 
