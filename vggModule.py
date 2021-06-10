@@ -34,7 +34,7 @@ class VGG(nn.Module):
     def forward(self, x):  # 모델이 학습 데이터를 입력 받아서 forward prop을 진행시키는 함수
         #features = self.conv(x)
         x = self.features(x)
-        x = self.avgpool(x)
+        x = self.avgpool(x)   # Dropout 적용할때는 이 줄은 주석처리하고 학습해야함
         x = x.view(x.size(0), -1)   # x = torch.flatten(x, 1) 이걸로도 가능한것인지
         x = self.classifier(x)
         #x = self.softmax(x)
