@@ -141,7 +141,8 @@ def train(model, trainloader, testloader):
                 valAccuracy = (valCorrect / valSize) * 100
             
             #print('validation_loss {} validation_accuracy {}'.format(valLoss / valSize, valAccuracy))
-            print('val Loss: {}  Acc: {:.3f}'.format(valLoss / valSize, valAccuracy))
+            #print('val Loss: {}  Acc: {:.3f}'.format(valLoss / valSize, valAccuracy))    # 20210610
+            logger.info('val Loss: {}  Acc: {:.3f}'.format(valLoss / valSize, valAccuracy))   # 20210610
             valLoss = 0.0
 
 
