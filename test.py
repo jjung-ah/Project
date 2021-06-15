@@ -27,22 +27,21 @@ with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하�
     Y_test = labels.to(device)
     #print(Y_test.shape)
 
-    model = torch.load("/data/FoodDetection/Object_Detection/yolov5-test/ssd/models/ep10/vgg16_epoch10_batch393_accuracy73.223.pt")
+    model = torch.load(Configs.model_path)
     model.eval()
     prediction = model(X_test)
     correct_prediction = torch.argmax(prediction, 1) == Y_test
     accuracy = correct_prediction.float().mean()
     print('Accuracy:', accuracy.item())
 
-<<<<<<< HEAD
-=======
+
+
     # 테스트 데이터에서 무작위로 하나를 뽑아서 예측을 해본다
->>>>>>> dcf30afabdc1dcac547d73c222cb205bdf2933f4
+
     r = random.randint(0, len(testloader) - 1)
     X_single_data = images[r:r + 1].float().to(device)
     #X_single_data = images[r:r + 1].view(-1, 224 * 224).float().to(device)
     Y_single_data = labels[r:r + 1].to(device)
-<<<<<<< HEAD
 
     #print('Label: ', Y_single_data.item())
     print('Label: ', Y_single_data.item(), classes[Y_single_data.item()])
@@ -53,7 +52,7 @@ with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하�
     plt.imshow(images[r:r + 1].view(224, 224), cmap='Greys', interpolation='nearest')
     plt.show()
 
-=======
+
 
     #print('Label: ', Y_single_data.item())
     print('Label: ', Y_single_data.item(), classes[Y_single_data.item()])
@@ -63,4 +62,4 @@ with torch.no_grad(): # torch.no_grad()를 하면 gradient 계산을 수행하�
 
     plt.imshow(images[r:r + 1].view(224, 224), cmap='Greys', interpolation='nearest')
     plt.show()
->>>>>>> dcf30afabdc1dcac547d73c222cb205bdf2933f4
+
