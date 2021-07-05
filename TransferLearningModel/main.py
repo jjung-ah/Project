@@ -6,8 +6,10 @@ from torchvision.models.vgg import make_layers
 import matplotlib.pyplot as plt
 import numpy as np
 
-from vggModule import VGG
-from vggModule import *
+#from vggModule import VGG
+#from vggModule import *
+from ResNetModule import ResNet
+from ResNetModule import *
 from configs import Configs
 from train import train
 
@@ -27,7 +29,10 @@ def main():
 	    'E': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M']
 	}
     conv = make_layers(cfg[Configs.model_config], batch_norm=True)
-    model = VGG(conv, num_classes=Configs.class_num, init_weights=True)
+    #model = VGG(conv, num_classes=Configs.class_num, init_weights=True)
+    #model = models.resnet18(pretrained=True)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = resnet50().to(device)
     print(model)
 
     train(model, trainloader, testloader)
