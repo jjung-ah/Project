@@ -33,6 +33,8 @@ def main():
     #model = models.resnet18(pretrained=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = resnet50().to(device)
+    #model = resnet18().to(device)
+    #model = resnet152().to(device)   # 너무 커서 gpu 2개로도 out of memory 에러 발생
     print(model)
 
     train(model, trainloader, testloader)
