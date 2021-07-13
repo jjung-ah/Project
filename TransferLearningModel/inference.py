@@ -13,16 +13,20 @@ from torchvision import transforms
 
 import torch.nn as nn
 import torch.nn.functional as F
-from configs import Configs
-from vggModule import *
-from MyDataLoader import *
+#from configs import Configs
+#from vggModule import *
+#from MyDataLoader import *
 
 classes = ['fear', 'happy', 'sad', 'neutral', 'disgust', 'surprise', 'angry']
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 ######## dropout을 하지않은 flatten을 바로 한 모델은 shape 에러 발생 (try except를 사용하던지 해서 모든 모델에 가능하도록 해야함)#############
 #model = torch.load("/data/FoodDetection/Object_Detection/yolov5-test/ssd/models/ep100/vgg16_epoch99_batch393_accuracy92.875.pt")
 ######## dropout을 한 모델은 결과 도출 ##########
-model = torch.load("/data/FoodDetection/Object_Detection/yolov5-test/ssd/models/ep100_vgg16_dropout0.7/vgg11_epoch85_accuracy99.952.pt")
+#model = torch.load("/data/FoodDetection/Object_Detection/yolov5-test/ssd/models/ep100_vgg16_dropout0.7/vgg11_epoch85_accuracy99.952.pt")
+model = models.densenet161().to(device)
+#print(model)
+model.load_state_dict(torch.load("/content/drive/Shareddrives/zeogi_gogi/densenet_83_model.pth"))
+
 
 def test(path):
     
@@ -53,4 +57,5 @@ def test(path):
     return torch.argmax(single_prediction).item(), classes[torch.argmax(single_prediction).item()]
 
 
-test(Configs.test_image_path)
+#test(Configs.test_image_path)
+test('/content/drive/Shareddrives/zeogi_gogi/happy_0010.jpg')
