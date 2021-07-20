@@ -77,3 +77,7 @@ def test(path):
     img = plt.show()
     
     return torch.argmax(probabilities).item(), classes[torch.argmax(probabilities).item()]
+
+
+
+test('/content/drive/Shareddrives/zeogi_gogi/happy_0010.jpg')
